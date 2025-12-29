@@ -1,60 +1,113 @@
-# Image Finder (Streamlit + OpenAI + Qdrant)
+# Image Finder  
+**Streamlit · OpenAI · Qdrant**
 
-MVP aplikacji do wyszukiwania obrazów:
-- **Text → Image**: opis tekstowy → embedding → Top-K obrazów
-- **Image → Image**: obraz → opis (VLM) → embedding → Top-K obrazów
+Aplikacja typu MVP do wyszukiwania obrazów z wykorzystaniem embeddingów wektorowych.
 
-## 1) Instalacja
+Obsługiwane tryby:
+- **Text → Image** – opis tekstowy → embedding → Top-K obrazów  
+- **Image → Image** – obraz → opis (VLM) → embedding → Top-K obrazów  
+
+Projekt został przygotowany jako rozwiązanie zadania w ramach kursu *Pracuj w AI: Zostań Data Scientist od Zera*.
+
+---
+
+## Funkcjonalności
+- galeria obrazów (stock + obrazy użytkownika),
+- dodawanie i indeksowanie nowych obrazów,
+- wyszukiwanie semantyczne (tekst → obraz),
+- wyszukiwanie podobnych obrazów (obraz → obraz),
+- historia wyszukiwań,
+- zapisane wyszukiwania,
+- obsługa błędów i retry indeksowania.
+
+---
+
+## Struktura projektu
+.
+├── app.py # główna aplikacja Streamlit
+├── src/ # logika aplikacji
+│ ├── features/ # embeddingi i przetwarzanie obrazu
+│ ├── services/ # OpenAI, Qdrant
+│ ├── ui/ # zakładki UI
+│ └── utils/ # narzędzia pomocnicze
+├── data/
+│ ├── images/ # obrazy (stock + user)
+│ └── history.json # lokalna historia (runtime)
+├── scripts/
+│ ├── seed_stock.py # indeksowanie zdjęć startowych
+│ └── evaluate_retrieval.py
+├── notebooks/ # notatniki projektowe
+├── requirements.txt
+├── runtime.txt
+└── .env.example
+
+
+---
+
+## Instalacja
+Zalecane jest użycie wirtualnego środowiska Pythona.
+
 ```bash
+python -m venv .venv
+.venv\Scripts\activate
 pip install -r requirements.txt
-```
 
-## 2) Konfiguracja
-Skopiuj `.env.example` do `.env` i uzupełnij:
-- `OPENAI_API_KEY`
-- `QDRANT_URL` (+ opcjonalnie `QDRANT_API_KEY`)
+Konfiguracja
 
-## 3) Qdrant
-Najprościej lokalnie (Docker):
-```bash
+Skopiuj plik .env.example do .env i uzupełnij:
+
+OPENAI_API_KEY=YOUR_OPENAI_KEY
+QDRANT_URL=http://localhost:6333   # opcjonalnie
+QDRANT_API_KEY=                   # opcjonalnie
+
+
+Uwaga: plik .env nie powinien być commitowany do repozytorium.
+
+Qdrant – baza wektorowa
+Opcja A: Qdrant lokalny (zalecane do demo)
+
+Aplikacja może działać w trybie Qdrant Local (embedded) – bez Dockera i bez serwera.
+
+Opcja B: Qdrant z Dockerem
+
+Jeśli masz Docker Desktop:
+
 docker run -p 6333:6333 qdrant/qdrant
-```
 
-## 4) Seed (stock zdjęć)
-Wrzuć zdjęcia do `data/images/` (kilkanaście już jest), a następnie:
-```bash
+Seed danych (zdjęcia startowe)
+
+W repozytorium znajduje się kilka przykładowych obrazów w data/images/.
+
+Aby je zindeksować:
+
 python scripts/seed_stock.py
-```
 
-## 5) Uruchomienie aplikacji
-```bash
+Uruchomienie aplikacji
 streamlit run app.py
-```
-
-## Uwagi projektowe
-W MVP stosujemy podejście: **image → caption (VLM) → text embedding**,
-bo upraszcza system do jednej przestrzeni wektorowej i działa dobrze w demo.
 
 
-## Quick quality sanity-check
+Aplikacja uruchomi się domyślnie pod adresem:
+http://localhost:8501
 
-After seeding and indexing, you can run a simple self-retrieval test:
+Ocena jakości (opcjonalnie)
 
-```bash
+Prosty test self-retrieval:
+
 python scripts/evaluate_retrieval.py
-```
-
-It measures how often an image can retrieve itself in Top-K using its caption as a query.
 
 
-## Offline / API issues
-If AI captioning or embedding fails (e.g. temporary API issues), uploaded images are saved locally and listed under **Pending uploads**. You can retry indexing later.
+Sprawdza, czy obraz potrafi odnaleźć sam siebie w Top-K na podstawie własnego opisu.
 
-## Search history
-The app stores last ~200 actions in `data/history.json` (local only).
+Uwagi projektowe
 
+Zastosowano podejście image → caption → text embedding, aby korzystać z jednej przestrzeni wektorowej.
 
-## New in v1.6
-- Saved searches (run / delete)
-- Compare two searches side-by-side
-- Simple quality dashboard based on history
+Dane runtime (history.json, pending_uploads.json) są lokalne i nie powinny być wersjonowane.
+
+Projekt ma charakter demonstracyjny (MVP).
+
+Autor
+
+MarekColor
+Repozytorium:
+https://github.com/MarekColor/Zadanie_8-app-image_finder
