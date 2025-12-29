@@ -1,0 +1,120 @@
+[
+  {
+    "mode": "add",
+    "status": "pending",
+    "id": "6222253804096338975",
+    "error": "Missing OPENAI_API_KEY in environment (.env).",
+    "ts": 1766960984
+  },
+  {
+    "mode": "add",
+    "status": "pending",
+    "id": "6222253804096338975",
+    "error": "Error code: 401 - {'error': {'message': 'Incorrect API key provided: your_key*here. You can find your API key at https://platform.openai.com/account/api-keys.', 'type': 'invalid_request_error', 'param': None, 'code': 'invalid_api_key'}}",
+    "ts": 1766962288
+  },
+  {
+    "mode": "pending_retry",
+    "status": "indexed",
+    "id": "6222253804096338975",
+    "ts": 1766963440
+  },
+  {
+    "mode": "add",
+    "status": "indexed",
+    "id": "3456153962468701736",
+    "filename": "data\\images\\user\\3456153962468701736.png",
+    "caption": "The image features a tall, leafless tree with an intricate network of branches against a softly lit background. Surrounding the tree are hints of greenery, suggesting the onset of spring or early summer.",
+    "tags": [
+      "branches",
+      "landscape",
+      "nature",
+      "season",
+      "tree"
+    ],
+    "ts": 1766963469
+  },
+  {
+    "mode": "add",
+    "status": "indexed",
+    "id": "3456153962468701736",
+    "filename": "data\\images\\user\\3456153962468701736.png",
+    "caption": "bezlistne drzewo w lesie",
+    "tags": [
+      "drzewo",
+      "las"
+    ],
+    "ts": 1766963502
+  },
+  {
+    "mode": "add",
+    "status": "indexed",
+    "id": "10702923932737885678",
+    "filename": "data\\images\\user\\10702923932737885678.png",
+    "caption": "Ulica za deszczową szyba",
+    "tags": [
+      "deszcz",
+      "ulica",
+      "wieczór"
+    ],
+    "ts": 1766964202
+  },
+  {
+    "mode": "search",
+    "search_mode": "Text → Image",
+    "source_filter": "All",
+    "top_k": 12,
+    "query_label": "las",
+    "query_text": "las",
+    "results": [
+      {
+        "id": "6222253804096338975",
+        "score": 0.3232742546316807,
+        "filename": "data\\images\\user\\6222253804096338975.png",
+        "caption": "lew"
+      },
+      {
+        "id": "3456153962468701736",
+        "score": 0.21072484284219864,
+        "filename": "data\\images\\user\\3456153962468701736.png",
+        "caption": "bezlistne drzewo w lesie"
+      },
+      {
+        "id": "10702923932737885678",
+        "score": 0.15383039407312846,
+        "filename": "data\\images\\user\\10702923932737885678.png",
+        "caption": "Ulica za deszczową szyba"
+      }
+    ],
+    "ts": 1766964217
+  },
+  {
+    "mode": "search",
+    "search_mode": "Text → Image",
+    "source_filter": "All",
+    "top_k": 12,
+    "query_label": "lew",
+    "query_text": "lew",
+    "results": [
+      {
+        "id": "6222253804096338975",
+        "score": 1.0000000000000007,
+        "filename": "data\\images\\user\\6222253804096338975.png",
+        "caption": "lew"
+      },
+      {
+        "id": "3456153962468701736",
+        "score": 0.15224910595267108,
+        "filename": "data\\images\\user\\3456153962468701736.png",
+        "caption": "bezlistne drzewo w lesie"
+      },
+      {
+        "id": "10702923932737885678",
+        "score": 0.12159727685160096,
+        "filename": "data\\images\\user\\10702923932737885678.png",
+        "caption": "Ulica za deszczową szyba"
+      }
+    ],
+    "ts": 1766964237
+  }
+]

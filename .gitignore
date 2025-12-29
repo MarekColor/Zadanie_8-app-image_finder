@@ -1,0 +1,7 @@
+.env
+qdrant_local/
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+data/images/user/
